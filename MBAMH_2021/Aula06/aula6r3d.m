@@ -1,6 +1,6 @@
 % Aula 6 dia 26 de maio de 2021
 % Criado por Paulo Santiago & Alunos da Turma de MBAMH 2021
-%Chupa palmeiras
+% Curintia!
 close all
 clear all
 
