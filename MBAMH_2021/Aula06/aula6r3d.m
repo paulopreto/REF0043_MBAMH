@@ -1,9 +1,10 @@
 % Aula 6 dia 26 de maio de 2021
 % Criado por Paulo Santiago & Alunos da Turma de MBAMH 2021
 
+clear all
 clc
 close all
-clear all
+
 
 % Carregando pacotes necessarios
 pkg load image
@@ -96,18 +97,49 @@ dlmwrite ('.\image_to_calibration\c2_dlt.ref', c2_dlt, ',');
 disp('Arquivos de DLT calibration salvos no diretorio de image_to_calibration!')
 
 
+DLTs = [c1_dlt; c2_dlt]; % Criar a matriz de DLT para as duas cameras
+
 % Reconstruir em 3D o calibrador
-DLTs = [c1_dlt ; c2_dlt];
-
 nlin = size(calib_c1, 1);
-
+cc3d_calibrador = zeros(nlin, 3);
 for i = 1:nlin
-    cc2d = [calib_c1(i,:) ; calib_c2(i,:)];
+    cc2d = [calib_c1(i,:); calib_c2(i,:)];
     cc3d_calibrador(i, :) = rec3d(DLTs, cc2d)';
 end
-disp(' ')
-disp(cc3d_calibrador)
+%disp('Calibrador Reconstruido em 3D')
+%disp(cc3d_calibrador)
 
-disp(' ')
-materror = ref3d - cc3d_calibrador
+%disp('Matriz de erro de reconstrução do calibrador')
+materror = ref3d - cc3d_calibrador;
+disp('Erro médio de reconstrução')
+disp(mean(mean(abs(materror))))
 
+% Reconstruir em 3D o sujeito
+nlmarkers = size(c1_chute, 1);
+cc2d_lmarkers = zeros(nlmarkers, 3);
+for i = 1:nlmarkers
+    cc2d_lmarkers = [c1_chute(i,:); c2_chute(i,:)];
+    cc3d_lmarkers(i, :) = rec3d(DLTs, cc2d_lmarkers)';
+end
+
+if exist('arqs3d', 'dir') != 7
+    mkdir arqs3d
+end
+
+nomesalva = ["r3d_",date,"_",num2str(int64(time)),".3d"];
+dlmwrite (['.\arqs3d\',nomesalva], cc3d_lmarkers, ',');
+disp(['Arquivo ', nomesalva, ' salvo no diretorio arqs3d'])
+
+plot3(cc3d_calibrador(:, 1), cc3d_calibrador(:, 2), cc3d_calibrador(:, 3), 'r.', 'markersize', 10)
+view(70, 25)
+hold on
+plot3(cc3d_lmarkers(:, 1), cc3d_lmarkers(:, 2), cc3d_lmarkers(:, 3), 'b.', 'markersize', 20)
+plot3(cc3d_lmarkers(:, 1), cc3d_lmarkers(:, 2), cc3d_lmarkers(:, 3), 'g-', 'linewidth', 4)
+box on
+grid on
+daspect([1, 1, 1])
+xlabel('X - Medio-lateral')
+ylabel('Y - Postero-anterior')
+zlabel('Z - Vertical')
+title('Reconstrução 3D')
+rotate3d on
