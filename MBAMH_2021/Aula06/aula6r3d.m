@@ -1,10 +1,10 @@
-% Aula 6 dia 26 de maio de 2021
+% Aula 6 - dia 26 de maio de 2021
+% Update 2 de junho de 2021
 % Criado por Paulo Santiago & Alunos da Turma de MBAMH 2021
 
 clear all
 clc
 close all
-
 
 % Carregando pacotes necessarios
 pkg load image
@@ -84,7 +84,7 @@ end
 if res_medchute == 0
     c1_chute = load('.\image_chute_to_rec3D\c1_043.txt');
     c2_chute = load('.\image_chute_to_rec3D\c2_039.txt');
-    disp('Arquivos de chute carregados com sucesso!')
+    disp('Arquivos de chute medidos com sucesso!')
 end
 
 % Criar o DLT para calibracao de cada cameras
@@ -127,9 +127,10 @@ if exist('arqs3d', 'dir') != 7
 end
 
 nomesalva = ["r3d_",date,"_",num2str(int64(time)),".3d"];
-dlmwrite (['.\arqs3d\',nomesalva], cc3d_lmarkers, ',');
+dlmwrite (['.\arqs3d\',nomesalva], cc3d_lmarkers, ','); % salvar arquivo 3D
 disp(['Arquivo ', nomesalva, ' salvo no diretorio arqs3d'])
 
+fig5 = figure(5);
 plot3(cc3d_calibrador(:, 1), cc3d_calibrador(:, 2), cc3d_calibrador(:, 3), 'r.', 'markersize', 10)
 view(70, 25)
 hold on
@@ -143,3 +144,6 @@ ylabel('Y - Postero-anterior')
 zlabel('Z - Vertical')
 title('Reconstrução 3D')
 rotate3d on
+
+nomefigsalva = ["figure_3d_",date,"_",num2str(int64(time)),".png"];
+print(fig5, ['.\arqs3d\',nomefigsalva]) % salvar figura da reconstrucao 
