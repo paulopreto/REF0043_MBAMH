@@ -1,4 +1,16 @@
 function [autotrack] = trackingbolinha(thld)
+% TRACKINGBOLINHA.m
+% Aula 7 - dia 2 de junho de 2021
+% Tracking de uma bolinha caindo em um sequencia de imagens png
+% Criado por Paulo Santiago & Alunos da Turma de MBAMH 2021
+% Update 2 de junho de 2021 - 
+
+% evento de sincronizacao 
+% c1 sinc frame = 3742
+% c2 sinc frame = 3728
+% c1 range frames [3735:3742]
+% c2 range frames [3721:3728]
+
 pkg load io
 pkg load image
 
@@ -6,15 +18,17 @@ if nargin == 0
     thld = 0.71;
 end
 
-  for i = 1:7
-    frame1 = imread(['/home/preto/Documents/Disciplinas_2020/MACMH_MCACCE/Aula5/teste/teste0',num2str(i),'.png']);
+% frame1_c1 = imread('..\videos\c1_bolinha_png\c1_000003735.png');
+  for i = 1:8
+    j = i - 1 + 3735;
+    frame1 = imread(['..\videos\c1_bolinha_png\c1_00000',num2str(j),'.png']);
     frame1bw = im2bw(frame1, thld);
     close all
 %    figure(1)
     
     subplot(1,2,2)
     imshow(frame1bw)
-    title(['Frame = ',num2str(i)])
+    title(['Frame = ',num2str(j)])
 %    [x,y]=ginput(1)
 %    waitforbuttonpress()
 
@@ -43,9 +57,9 @@ end
     hold on
 %    set(gcf, 'Position', get(0,'Screensize'));
     imshow(frame1)
-    title(['Frame = ',num2str(i)])
-    plot(coord_x_bolinha, coord_y_bolinha, 'y+', 'MarkerSize', 12)
-    plot(coord_x_bolinha, coord_y_bolinha, 'yo', 'MarkerSize', 12)
+    title(['Frame = ',num2str(j)])
+    plot(coord_x_bolinha, coord_y_bolinha, 'y+', 'MarkerSize', 6)
+    plot(coord_x_bolinha, coord_y_bolinha, 'yo', 'MarkerSize', 6)
     
     autotrack(i,:) = [coord_x_bolinha, coord_y_bolinha];
     nomes = [num2str(i),".png"];
@@ -53,4 +67,5 @@ end
     saveas(1, nomes);
 %    waitforbuttonpress()
     end
+dlmwrite ("c1.dat", autotrack, ','); % salvar arquivo .dat de coordenada de tela
 end
