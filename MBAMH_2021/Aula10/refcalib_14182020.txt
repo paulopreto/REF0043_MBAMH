@@ -1,0 +1,3 @@
+eu = 88.8
+anilhas = 7.95
+eu_+_anilhas = 96.75
