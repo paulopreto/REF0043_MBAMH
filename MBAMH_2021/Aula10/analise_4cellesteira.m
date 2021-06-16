@@ -86,4 +86,5 @@ br = -1 * (mr * xV1 - ykg1); % coeficiente linear
 peso_sujeito_volts = sum(mean(peso_sujeito));
 preto_kg = mr * peso_sujeito_volts + br;
 
+disp(["Equation: Y = ",num2str(mr),".X + ",num2str(br)])
 disp(["O peso do Paulo Preto eh de ", num2str(preto_kg), " kg"])
