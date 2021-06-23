@@ -42,41 +42,41 @@ float calibration_factor = -43956;
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("Calibracao");
-  Serial.println("Remova qualquer peso sobre a celula de carga");
-  Serial.println("Apos inicio das amostragens, coloque um peso conhecido sobre a celula de carga");
-  Serial.println("Pressione + ou a para incrementar o Fator de calibracaoo caso necessario");
-  Serial.println("Pressione - ou z para decrementar o Fator de calibracao caso necessario");
-  delay(5000);
+  //Serial.println("Calibracao");
+  //Serial.println("Remova qualquer peso sobre a celula de carga");
+  //Serial.println("Apos inicio das amostragens, coloque um peso conhecido sobre a celula de carga");
+  //Serial.println("Pressione + ou a para incrementar o Fator de calibracaoo caso necessario");
+  //Serial.println("Pressione - ou z para decrementar o Fator de calibracao caso necessario");
+  //delay(5000);
 
   scale.set_scale();
   scale.tare(); // Reset the scale to 0
 
   long zero_factor = scale.read_average(); // Get a baseline reading
-  Serial.print("Zero factor: "); // This can be used to remove the need to tare the scale. Useful in permanent scale projects.
-  Serial.println(zero_factor);
+  delay(200);
+  //Serial.print("Zero factor: "); // This can be used to remove the need to tare the scale. Useful in permanent scale projects.
+  //Serial.println(zero_factor);
 }
 
 void loop() {
   scale.set_scale(calibration_factor); // Adjust to this calibration factor
 
-  Serial.print("Peso atual: ");
+  // Serial.print("Peso atual: ");
   Serial.print(scale.get_units(), 1);
-  Serial.print(" kg");
-  Serial.print(" Fator de calibracao: ");
-  Serial.print(calibration_factor);
+  //Serial.print(",");
+  //Serial.print(" kg");
+  //Serial.print(" Fator de calibracao: ");
+  //Serial.print(",");
+  //Serial.print(calibration_factor);
   Serial.println();
 
-  if(Serial.available())
-  {
-    char temp = Serial.read();
-    if(temp == '+' || temp == 'a')
-      calibration_factor += 10;
-    else if(temp == '-' || temp == 'z')
-      calibration_factor -= 10;
-  }
-  delay(100);
+  //if(Serial.available())
+  //{
+  //  char temp = Serial.read();
+  //  if(temp == '+' || temp == 'a')
+  //    calibration_factor += 10;
+  //  else if(temp == '-' || temp == 'z')
+  //    calibration_factor -= 10;
+  //}
+  //delay(100);
 }
-
-
-
