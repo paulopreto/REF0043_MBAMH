@@ -38,7 +38,7 @@
 
 HX711 scale(DOUT, CLK);
 
-float calibration_factor = -43956;
+float calibration_factor = -44216;
 
 void setup() {
   Serial.begin(9600);
@@ -61,13 +61,14 @@ void setup() {
 void loop() {
   scale.set_scale(calibration_factor); // Adjust to this calibration factor
 
-  // Serial.print("Peso atual: ");
+  //Serial.print("Peso atual: ");
   Serial.print(scale.get_units(), 1);
   //Serial.print(",");
   //Serial.print(" kg");
   //Serial.print(" Fator de calibracao: ");
   //Serial.print(",");
   //Serial.print(calibration_factor);
+  delay(100);
   Serial.println();
 
   //if(Serial.available())
@@ -77,6 +78,6 @@ void loop() {
   //    calibration_factor += 10;
   //  else if(temp == '-' || temp == 'z')
   //    calibration_factor -= 10;
-  //}
-  //delay(100);
+ // }
+ // delay(100);
 }
