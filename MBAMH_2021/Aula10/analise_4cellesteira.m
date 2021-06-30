@@ -3,7 +3,7 @@ clear all
 close all
 
 % Valores conhecidos - constantes
-mass_sujeito = 88.8; % kg ?????
+mass_sujeito = 88.8; % kg ??????????
 mass_anilhas = 7.95; % kg
 mass_sujeito_anilhas = 96.75; % kg
 
