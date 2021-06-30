@@ -35,11 +35,7 @@ end
     
     if (block == "Y") || (block == "y")
         frame1bw = im2bw(frame1, thld);
-        frame1bw = blockregion(frame1bw, cols, lins);
-%        frame1bw(:, 1:cols(1)) = 0;
-%        frame1bw(:, cols(2):end) = 0;
-%        frame1bw(1:lins(1), cols(1):cols(2)) = 0;
-%        frame1bw(lins(2):end, cols(1):cols(2)) = 0;
+        frame1bw = blockregion(frame1bw, cols, lins); % Função bloquear região da imagem
     else
         frame1bw = im2bw(frame1, thld); 
     end
