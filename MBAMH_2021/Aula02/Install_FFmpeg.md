@@ -1,4 +1,4 @@
-# Vide a bula ffmpeg Paulo Santiago
+# Vide a bula ffmpeg Paulo Santiago - Comandos em terminal bash, mas alguns funcionam no Terminal do Windows ou em Powershell
 
 # Install FFMPEG
 setx /m PATH "C:\FFmpeg\bin;%PATH%"
