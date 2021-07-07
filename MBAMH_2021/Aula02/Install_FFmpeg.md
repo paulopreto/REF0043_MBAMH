@@ -7,7 +7,7 @@ setx /m PATH "C:\FFmpeg\bin;%PATH%"
 # https://trac.ffmpeg.org/wiki/Capture/Webcam
 
 # Gravar com o ffmpeg
-ffmpeg -i /dev/video1 -framerate 60 -video_size 1280x720 out.mp4
+ffmpeg -i /dev/video1 -framerate 60 -video_size 1280x720 out.mp4 \
 ffmpeg -f video4linux2 -i /dev/video1 -framerate 60.0 -video_size 1280x720 out.mp4
 
 # info da media
